@@ -1,0 +1,9 @@
+[
+	{
+		"operation": "shift",
+		"spec": {
+				"trainingId": "training.trainingId",
+				"traineeId": "training.traineeId"
+		}
+	}
+]

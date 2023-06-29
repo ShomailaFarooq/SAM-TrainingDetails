@@ -1,0 +1,27 @@
+[
+	{
+		"operation": "shift",
+		"spec": {
+			"trainingId": "training.trainingId",
+			"traineeId": "training.traineeId",
+			"courseName": "training.courseDetails.courseName",
+			"sector": "training.courseDetails.sector",
+			"batchStartDate": "training.courseDetails.batchStartDate",
+			"batchEndDate": "training.courseDetails.batchEndDate",
+			
+			"industryVisitCompleted": "training.trainingProcess.industryVisitCompleted",
+			"ojtCompleted": "training.trainingProcess.ojtCompleted",
+			
+			"trainingStatus": "training.trainingOutput.trainingStatus",
+			"attendancePercentage": "training.trainingOutput.attendancePercentage",
+			"assessmentConducted": "training.trainingOutput.assessmentConducted",
+			"certified": "training.trainingOutput.certified",
+			"dateOfCoursePassing": "training.trainingOutput.dateOfCoursePassing",
+			"dateOfIssuanceOfCertificate": "training.trainingOutput.dateOfIssuanceOfCertificate",
+			"certificateNameOrAward": "training.trainingOutput.certificateNameOrAward",
+			"grade": "training.trainingOutput.grade",	
+			"comments": "training.comments",
+			"lastUpdateTimestamp": "training.lastUpdateTimestamp" 
+		}
+	}
+]
