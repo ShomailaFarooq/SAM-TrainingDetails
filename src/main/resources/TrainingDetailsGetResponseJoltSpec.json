@@ -13,7 +13,7 @@
 			"ojtCompleted": "training.trainingProcess.ojtCompleted",
 			
 			"trainingStatus": "training.trainingOutput.trainingStatus",
-			"attendancePercentage": "training.trainingOutput.attendancePercentage",
+			"attendencePercentage": "training.trainingOutput.attendencePercentage",
 			"assessmentConducted": "training.trainingOutput.assessmentConducted",
 			"certified": "training.trainingOutput.certified",
 			"dateOfCoursePassing": "training.trainingOutput.dateOfCoursePassing",

@@ -17,7 +17,7 @@
 				},
 				"trainingOutput": {
 					"trainingStatus": "trainingStatus",
-					"attendancePercentage": "attendancePercentage",
+					"attendencePercentage": "attendencePercentage",
 					"assessmentConducted": "assessmentConducted",
 					"certified": "certified",
 					"dateOfCoursePassing": "dateOfCoursePassing",

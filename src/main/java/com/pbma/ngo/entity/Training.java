@@ -56,8 +56,8 @@ public class Training {
 	@Column(name = "training_status")
     private String trainingStatus;
 
-    @Column(name = "attendance_percentage")
-    private float  attendancePercentage;
+    @Column(name = "attendence_percentage")
+    private float  attendencePercentage;
     
     @Column(name = "assessment_conducted")
     private String assessmentConducted;
