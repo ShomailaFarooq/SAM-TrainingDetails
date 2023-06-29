@@ -40,6 +40,7 @@ public class TrainingDetailsServiceImpl implements TrainingDetailsService {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		Training requestTrainingObject = objectMapper.readValue(transformedTrainingRequest, Training.class);
+		//System.out.println(requestTrainingObject);
 		Training training = trainingRepository.save(requestTrainingObject);
 		trainingDetailsLogger.info("Training Details inserted in database successfully");
 

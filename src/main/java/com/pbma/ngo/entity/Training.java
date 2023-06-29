@@ -1,18 +1,22 @@
 package com.pbma.ngo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.sql.Date;
+import java.sql.Timestamp;
 
-/*import javax.persistence.Column;
+
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.Table;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;*/
+import javax.persistence.Table;
 
 import lombok.Data;
 
@@ -38,10 +42,10 @@ public class Training {
     private String sector;
     
     @Column(name = "batch_start_date")
-    private String batchStartDate;
+    private Date batchStartDate;
     
     @Column(name = "batch_end_date")
-    private String batchEndDate;
+    private Date batchEndDate;
     
     @Column(name = "industry_visit_completed")
     private String industryVisitCompleted;
@@ -53,7 +57,7 @@ public class Training {
     private String trainingStatus;
 
     @Column(name = "attendance_percentage")
-    private Float attendancePercentage;
+    private float  attendancePercentage;
     
     @Column(name = "assessment_conducted")
     private String assessmentConducted;
@@ -62,10 +66,10 @@ public class Training {
     private String certified;
     
     @Column(name = "date_of_course_passing")
-    private String dateOfCoursePassing;
+    private Date dateOfCoursePassing;
     
     @Column(name = "date_of_issuance_of_certificate")
-    private String dateOfIssuanceOfCertificate;
+    private Date dateOfIssuanceOfCertificate;
     
     @Column(name = "certificate_name_or_award")
     private String certificateNameOrAward;
@@ -77,6 +81,8 @@ public class Training {
     private String comments;
     
     @Column(name = "last_update_timestamp")
-    private String lastUpdateTimestamp;
+    private Timestamp lastUpdateTimestamp;
 
+    @Column(name = "creation_timestamp")
+    private Timestamp creationTimestamp;
 }

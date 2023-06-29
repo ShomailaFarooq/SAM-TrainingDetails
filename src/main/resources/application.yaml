@@ -8,8 +8,8 @@ spring:
   datasource:
     #url: jdbc:h2:mem:test;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS student
     url: jdbc:postgresql://34.96.209.61:5432/postgres
-    username: postgres
-    password: postgres
+    username: postgresUserCrud
+    password: postgresUserCrud
   jpa:
     open-in-view: false
     properties:

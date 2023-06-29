@@ -21,7 +21,8 @@
 			"certificateNameOrAward": "training.trainingOutput.certificateNameOrAward",
 			"grade": "training.trainingOutput.grade",	
 			"comments": "training.comments",
-			"lastUpdateTimestamp": "training.lastUpdateTimestamp" 
+			"lastUpdateTimestamp": "training.lastUpdateTimestamp",
+			"creationTimestamp": "training.creationTimestamp"
 		}
 	}
 ]
