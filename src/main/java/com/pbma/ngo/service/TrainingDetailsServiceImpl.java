@@ -1,5 +1,7 @@
 package com.pbma.ngo.service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -35,12 +37,38 @@ public class TrainingDetailsServiceImpl implements TrainingDetailsService {
 
 		// jolt for request json - flatten to map to entity
 		String transformedTrainingRequest = TrainingDetailsUtils.transformRequest(trainingDetailsRequest,
-				trainingDetailsConfig.getTrainingDetailsRequestJoltSpec());
+				trainingDetailsConfig.getTrainingDetailsPostRequestJoltSpec());
 		trainingDetailsLogger.debug("Save Training Details transformed request : {}", transformedTrainingRequest);
+		System.out.println(transformedTrainingRequest);
+
+		JSONObject transformedTrainingRequestJsonObject = new JSONObject(transformedTrainingRequest);
+		Long traineeId = transformedTrainingRequestJsonObject.getLong(Constants.TRAINEE_ID);		
+
+		List<Training> allTrainings = trainingRepository.findAllByTraineeIdOrderByTrainingIdDesc(traineeId);
+		Long trainingId = (long) 1;
+		if (allTrainings != null && !allTrainings.isEmpty()) 
+		{
+		trainingId = allTrainings.get(0).getTrainingId() + 1;
+		}
+
+
+
+
 
 		ObjectMapper objectMapper = new ObjectMapper();
+
 		Training requestTrainingObject = objectMapper.readValue(transformedTrainingRequest, Training.class);
-		//System.out.println(requestTrainingObject);
+
+		requestTrainingObject.setTrainingId(trainingId);
+		System.out.println(requestTrainingObject);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear(Calendar.ZONE_OFFSET);
+
+		Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
+		requestTrainingObject.setCreationTimestamp(timestamp);
+		requestTrainingObject.setLastUpdateTimestamp(timestamp);
+
 		Training training = trainingRepository.save(requestTrainingObject);
 		trainingDetailsLogger.info("Training Details inserted in database successfully");
 
@@ -71,6 +99,7 @@ public class TrainingDetailsServiceImpl implements TrainingDetailsService {
 					new JSONObject(training).toString(Constants.JSON_OBJECT_INDENTATION_FACTOR),
 					trainingDetailsConfig.getTrainingDetailsGetResponseJoltSpec()));
 			transformedTrainings.put(responseTraining);
+			//System.out.println(responseTraining);
 
 		});
 
@@ -104,4 +133,58 @@ public class TrainingDetailsServiceImpl implements TrainingDetailsService {
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 
 	}
+	@Override
+	public ResponseEntity<String> updateTrainingDetails(final long traineeId, final long trainingId, final String trainingDetailsRequest)
+			throws Exception {
+
+		// add trainee id received as uri param in request body
+		// JSONObject trainingDetailsRequestJsonObject = new JSONObject(trainingDetailsRequest);
+		// trainingDetailsRequestJsonObject.getJSONObject(Constants.TRAINING).put(Constants.TRAINEE_ID, traineeId);
+
+		// create update request and save details
+		String transformedTrainingRequest = TrainingDetailsUtils.transformRequest(
+				trainingDetailsRequest,trainingDetailsConfig.getTrainingDetailsPutRequestJoltSpec());
+		trainingDetailsLogger.debug("Update Training Details transformed request : {}", transformedTrainingRequest);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		Training requestTrainingObject = objectMapper.readValue(transformedTrainingRequest, Training.class);
+		
+		if( (!requestTrainingObject.getTraineeId().equals(traineeId))  || (!requestTrainingObject.getTrainingId().equals(trainingId))){
+			trainingDetailsLogger.info("Training Id and Trainee Id mismatch");
+			throw new Exception();
+
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear(Calendar.ZONE_OFFSET);
+		Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
+		requestTrainingObject.setLastUpdateTimestamp(timestamp);
+
+		trainingRepository.save(requestTrainingObject);
+		trainingDetailsLogger.info("Training Details updated in database successfully");
+
+
+		// retrieve updated details from database
+		String response = this.getTrainingDetailsByTraineeIdAndTrainingId(traineeId,trainingId).getBody();
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+	}
+
+
+	@Override
+	public ResponseEntity<String> getTrainingDetailsByTraineeIdAndTrainingId(long traineeId, long trainingId)
+			throws Exception {
+				Training training = trainingRepository.findByTraineeIdAndTrainingId(traineeId, trainingId);
+				trainingDetailsLogger.info("All Training Details retrieved from database successfully");
+			
+				String trainingResponse = new JSONObject(training).toString(Constants.JSON_OBJECT_INDENTATION_FACTOR);
+			
+				String response = new JSONObject(TrainingDetailsUtils.transformRequest(trainingResponse,
+					trainingDetailsConfig.getTrainingDetailsGetResponseJoltSpec()))
+					.toString(Constants.JSON_OBJECT_INDENTATION_FACTOR);
+				trainingDetailsLogger.debug("Get training Details transformed response : {}", response);
+			
+				return new ResponseEntity<String>(response, HttpStatus.OK);
+			
+				}
+
+
 }

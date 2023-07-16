@@ -12,4 +12,8 @@ import com.pbma.ngo.entity.Training;
 public interface TrainingRepository extends JpaRepository<Training, Long> {
 
 	public List <Training> findByTraineeId (@Param("traineeId") final long traineeId);
+
+	public List<Training> findAllByTraineeIdOrderByTrainingIdDesc(Long traineeId);
+
+	public Training findByTraineeIdAndTrainingId(long traineeId, long trainingId);
 }

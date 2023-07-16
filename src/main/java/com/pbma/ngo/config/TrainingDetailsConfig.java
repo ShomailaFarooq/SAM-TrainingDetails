@@ -15,8 +15,8 @@ public class TrainingDetailsConfig {
 	private ApplicationYaml applicationYaml;
 	
 	@Bean
-	public List<Object> getTrainingDetailsRequestJoltSpec() {
-		return JsonUtils.classpathToList(applicationYaml.getJolt().getTrainingDetailsRequestJoltSpec());
+	public List<Object> getTrainingDetailsPostRequestJoltSpec() {
+		return JsonUtils.classpathToList(applicationYaml.getJolt().getTrainingDetailsPostRequestJoltSpec());
 	}
 	
 	@Bean
@@ -28,5 +28,10 @@ public class TrainingDetailsConfig {
 	public List<Object> getTrainingDetailsPostResponseJoltSpec() {
 		return JsonUtils.classpathToList(applicationYaml.getJolt().getTrainingDetailsPostResponseJoltSpec());
 	}
-	
+
+	@Bean
+	public List<Object> getTrainingDetailsPutRequestJoltSpec() {
+		return JsonUtils.classpathToList(applicationYaml.getJolt().getTrainingDetailsPutRequestJoltSpec());
+	}
+
 }

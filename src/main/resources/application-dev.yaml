@@ -1,5 +1,6 @@
 app:
   jolt:
-    trainingDetailsRequestJoltSpec: /TrainingDetailsRequestJoltSpec.json
+    trainingDetailsPostRequestJoltSpec: /TrainingDetailsPostRequestJoltSpec.json
     trainingDetailsGetResponseJoltSpec: /TrainingDetailsGetResponseJoltSpec.json
     trainingDetailsPostResponseJoltSpec: /TrainingDetailsPostResponseJoltSpec.json
+    trainingDetailsPutRequestJoltSpec: /TrainingDetailsPutRequestJoltSpec.json
